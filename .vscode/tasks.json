@@ -1,0 +1,42 @@
+{
+    // Uitvoeren via: Terminal → Run Task...  (of Ctrl+Shift+P → "Tasks: Run Task")
+    "version": "2.0.0",
+    "windows": {
+        "options": {
+            "shell": {
+                "executable": "C:\\Program Files\\Git\\bin\\bash.exe",
+                "args": ["-c"]
+            }
+        }
+    },
+    "tasks": [
+        {
+            "label": "💾 Opslaan op GitHub (commit + push)",
+            "type": "shell",
+            "command": "git add -A && git commit -m \"${input:commitBericht}\" && git push && echo '' && echo '✅ Opgeslagen op GitHub.'",
+            "problemMatcher": [],
+            "presentation": { "reveal": "always", "panel": "dedicated" }
+        },
+        {
+            "label": "🧪 Website + testmailbox (her)starten",
+            "type": "shell",
+            "command": "[ -f api/config.php ] || bash .devcontainer/setup.sh; bash .devcontainer/start.sh",
+            "isBackground": true,
+            "problemMatcher": []
+        },
+        {
+            "label": "📊 Status publicatie bekijken",
+            "type": "shell",
+            "command": "echo 'Open: https://github.com/Macie69/KinesistMerksem/actions'",
+            "problemMatcher": []
+        }
+    ],
+    "inputs": [
+        {
+            "id": "commitBericht",
+            "type": "promptString",
+            "description": "Wat heb je aangepast?",
+            "default": "Website bijgewerkt"
+        }
+    ]
+}

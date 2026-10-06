@@ -1,0 +1,59 @@
+# ==========================================================================
+# Automatisch publiceren naar Hostinger
+# Bij elke push naar "main" (bv. vanuit VS Code) wordt de website
+# automatisch geüpload. Alleen gewijzigde bestanden worden verstuurd.
+#
+# ⏸️  VOORLOPIG UIT. Aanzetten zodra Hostinger klaar is:
+#     GitHub → Settings → Secrets and variables → Actions → tabblad "Variables"
+#     → New repository variable:  HOSTINGER_DEPLOY = true
+# ==========================================================================
+name: Website publiceren
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # handmatig starten via het tabblad "Actions"
+
+concurrency:
+  group: publiceren
+  cancel-in-progress: false
+
+jobs:
+  publiceren:
+    if: vars.HOSTINGER_DEPLOY == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code ophalen
+        uses: actions/checkout@v7
+
+      - name: PHP-code controleren op fouten
+        run: |
+          if command -v php >/dev/null; then
+            for f in api/*.php beheer/*.php; do php -l "$f"; done
+          else
+            echo "PHP niet beschikbaar, controle overgeslagen"
+          fi
+
+      - name: config.php aanmaken uit GitHub Secrets
+        env:
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          SECRET_SALT: ${{ secrets.SECRET_SALT }}
+        run: python3 .github/scripts/maak_config.py
+
+      - name: Uploaden naar Hostinger
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Het FTP-account wijst al naar public_html, dus uploaden naar de hoofdmap
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            .vscode/**
+            .devcontainer/**
+            README.md
+            data/aanvragen.sqlite*

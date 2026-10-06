@@ -1,0 +1,5 @@
+# Altijd LF-regeleindes (zoals op de server); voorkomt CRLF-waarschuwingen op Windows
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.svg text eol=lf

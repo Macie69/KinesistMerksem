@@ -120,72 +120,88 @@
     });
 
     // ==========================================================================
-    // Contact Form (Formspree)
+    // Contactformulier (eigen backend: /api/contact.php)
     // ==========================================================================
+    const pageLang = (document.documentElement.lang || 'nl').toLowerCase() === 'pl' ? 'pl' : 'nl';
+    const formText = {
+        nl: {
+            name: 'Vul alstublieft uw naam in.',
+            email: 'Vul alstublieft uw e-mailadres in.',
+            emailInvalid: 'Vul alstublieft een geldig e-mailadres in.',
+            consent: 'Geef alstublieft toestemming voor het verwerken van uw gegevens.',
+            sending: 'Versturen...',
+            success: 'Bedankt voor uw aanvraag! We nemen zo snel mogelijk contact met u op.',
+            error: 'Er is iets misgegaan. Probeer het opnieuw of neem telefonisch contact op: +32 483 18 26 63.'
+        },
+        pl: {
+            name: 'Proszę podać imię i nazwisko.',
+            email: 'Proszę podać adres e-mail.',
+            emailInvalid: 'Proszę podać prawidłowy adres e-mail.',
+            consent: 'Proszę wyrazić zgodę na przetwarzanie danych.',
+            sending: 'Wysyłanie...',
+            success: 'Dziękujemy za zapytanie! Skontaktujemy się z Tobą jak najszybciej.',
+            error: 'Coś poszło nie tak. Spróbuj ponownie lub zadzwoń: +32 483 18 26 63.'
+        }
+    }[pageLang];
+
     if (contactForm) {
+        // Tijdstip waarop het formulier geladen werd (antispam)
+        const tsField = document.getElementById('formTs');
+        if (tsField) tsField.value = Date.now();
+
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Basic validation
+
             const name = document.getElementById('name');
             const email = document.getElementById('email');
-            
-            // Reset previous errors
+            const consent = contactForm.querySelector('input[name="consent"]');
+
             formMessage.textContent = '';
             formMessage.className = 'form-message';
-            
-            // Validate name
+
             if (!name.value.trim()) {
-                showFormMessage('Vul alstublieft uw naam in.', 'error');
+                showFormMessage(formText.name, 'error');
                 name.focus();
                 return;
             }
-            
-            // Validate email
             if (!email.value.trim()) {
-                showFormMessage('Vul alstublieft uw e-mailadres in.', 'error');
+                showFormMessage(formText.email, 'error');
                 email.focus();
                 return;
             }
-            
             if (!isValidEmail(email.value)) {
-                showFormMessage('Vul alstublieft een geldig e-mailadres in.', 'error');
+                showFormMessage(formText.emailInvalid, 'error');
                 email.focus();
                 return;
             }
-            
-            // Submit form via AJAX to Formspree
+            if (consent && !consent.checked) {
+                showFormMessage(formText.consent, 'error');
+                consent.focus();
+                return;
+            }
+
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalText = submitBtn.innerHTML;
-            
-            submitBtn.innerHTML = '<span>Versturen...</span>';
+            submitBtn.innerHTML = '<span>' + formText.sending + '</span>';
             submitBtn.disabled = true;
-            
-            const formData = new FormData(contactForm);
-            
+
             fetch(contactForm.action, {
                 method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
+                body: new FormData(contactForm),
+                headers: { 'Accept': 'application/json' }
             })
-            .then(response => {
-                if (response.ok) {
-                    showFormMessage('Bedankt voor uw aanvraag! We nemen zo snel mogelijk contact met u op.', 'success');
+            .then(response => response.json().catch(() => ({ ok: false })))
+            .then(data => {
+                if (data.ok) {
+                    showFormMessage(data.message || formText.success, 'success');
                     contactForm.reset();
+                    if (tsField) tsField.value = Date.now();
                 } else {
-                    return response.json().then(data => {
-                        if (data.errors) {
-                            showFormMessage('Er is iets misgegaan: ' + data.errors.map(e => e.message).join(', '), 'error');
-                        } else {
-                            showFormMessage('Er is iets misgegaan. Probeer het opnieuw of neem telefonisch contact op.', 'error');
-                        }
-                    });
+                    showFormMessage(data.message || formText.error, 'error');
                 }
             })
-            .catch(error => {
-                showFormMessage('Er is iets misgegaan. Probeer het opnieuw of neem telefonisch contact op.', 'error');
+            .catch(() => {
+                showFormMessage(formText.error, 'error');
             })
             .finally(() => {
                 submitBtn.innerHTML = originalText;
@@ -482,7 +498,6 @@
         // Check if browser is Polish
         const isPolishBrowser = browserLang.startsWith('pl');
 
-        console.log('Browser lang:', browserLang, '| Page lang:', htmlLang, '| Is Polish page:', isPolishPage, '| Is Polish browser:', isPolishBrowser);
 
         // Only show if there's a mismatch
         if ((isPolishBrowser && !isPolishPage) || (!isPolishBrowser && isPolishPage)) {

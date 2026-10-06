@@ -1824,3 +1824,38 @@ p:last-child {
 .practice-map-link:hover {
     color: var(--color-primary-dark);
 }
+
+/* --------------------------------------------------------------------------
+   Contactformulier: toestemming + antispam
+   -------------------------------------------------------------------------- */
+.form-consent {
+    margin-top: 0.25rem;
+}
+
+.consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.consent-label input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+/* Honeypot: onzichtbaar voor bezoekers, bots vullen het wel in */
+.hp-field {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}

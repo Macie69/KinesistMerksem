@@ -1,0 +1,27 @@
+{
+    // GitHub Codespaces / Dev Container voor M-Physio Care
+    // Start: GitHub → Code → Codespaces → "Create codespace on main"
+    "name": "M-Physio Care",
+    "image": "mcr.microsoft.com/devcontainers/php:8.3",
+
+    // Eenmalig bij aanmaken: Mailpit installeren, PHP instellen, config.php maken
+    "postCreateCommand": "bash .devcontainer/setup.sh",
+    // Elke keer bij opstarten: website en testmailbox starten
+    "postStartCommand": "bash .devcontainer/start.sh",
+
+    "forwardPorts": [8000, 8025],
+    "portsAttributes": {
+        "8000": { "label": "🌐 Website", "onAutoForward": "openBrowser" },
+        "8025": { "label": "📬 Testmailbox (Mailpit)", "onAutoForward": "notify" }
+    },
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "github.vscode-github-actions",
+                "mhutchie.git-graph",
+                "bmewburn.vscode-intelephense-client"
+            ]
+        }
+    }
+}

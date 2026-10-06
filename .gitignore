@@ -1,0 +1,11 @@
+# Systeembestanden
+.DS_Store
+Thumbs.db
+*.zip
+
+# GEHEIM: wachtwoorden en instellingen (nooit naar GitHub!)
+api/config.php
+
+# Patiëntgegevens: database met aanvragen (nooit naar GitHub!)
+data/*
+!data/.htaccess

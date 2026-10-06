@@ -1,0 +1,9 @@
+{
+    // VS Code stelt deze extensies voor zodra je de map opent
+    "recommendations": [
+        "ritwickdey.LiveServer",
+        "github.vscode-github-actions",
+        "mhutchie.git-graph",
+        "bmewburn.vscode-intelephense-client"
+    ]
+}

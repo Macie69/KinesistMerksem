@@ -1,0 +1,25 @@
+{
+    // Zelfde regeleindes als op de server (voorkomt de LF/CRLF-waarschuwingen)
+    "files.eol": "\n",
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+    "editor.tabSize": 4,
+
+    // Geen database of bibliotheken in zoekresultaten
+    "search.exclude": {
+        "data/**": true,
+        "api/lib/**": true
+    },
+    "files.exclude": {
+        "**/.DS_Store": true
+    },
+
+    // Git: na commit automatisch pushen = automatisch publiceren
+    "git.enableSmartCommit": true,
+    "git.postCommitCommand": "push",
+    "git.confirmSync": false,
+
+    // Live Server: open de site lokaal in de browser
+    "liveServer.settings.root": "/",
+    "liveServer.settings.port": 5500
+}

@@ -1,0 +1,45 @@
+# ==========================================================================
+# M-Physio Care – kinesistmerksem.com
+# ==========================================================================
+
+DirectoryIndex index.html index.php
+Options -Indexes
+AddDefaultCharset UTF-8
+
+RewriteEngine On
+
+# 1. Altijd HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 2. Altijd zonder www (www.kinesistmerksem.com -> kinesistmerksem.com)
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# 3. Oude Poolse link -> nieuwe nette link
+RewriteRule ^index-pl\.html$ /pl/ [L,R=301]
+
+# 4. "index.html" uit de adresbalk halen (/index.html -> /, /pl/index.html -> /pl/)
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+RewriteRule ^(.*/)?index\.html$ /$1 [L,R=301]
+
+# 5. /pl zonder slash -> /pl/
+RewriteRule ^pl$ /pl/ [L,R=301]
+
+# Gevoelige bestanden nooit tonen
+<FilesMatch "\.(sqlite|sqlite-wal|sqlite-shm|md|log|example\.php)$|^\.git">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+</FilesMatch>
+RedirectMatch 404 /\.git
+
+# Caching van afbeeldingen, CSS en JS
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>
