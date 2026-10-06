@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="M-Physio Care — Kinesitherapie in Merksem. Gespecialiseerde behandeling voor pijn, revalidatie, sportblessures en zwangerschapsbegeleiding. Persoonlijke aanpak met duurzaam resultaat.">
+    <meta name="keywords" content="kinesitherapie, Merksem, fysiotherapie, revalidatie, sportblessures, dry needling, nekpijn, rugpijn">
+    <meta name="author" content="M-Physio Care">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="M-Physio Care | Kinesitherapie Merksem">
+    <meta property="og:description" content="Persoonlijke kinesitherapie met aandacht voor uw herstel. Evidence-based behandelingen voor pijn, revalidatie en houdingsoptimalisatie.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kinesistmerksem.com">
+    
+    <title>M-Physio Care | Kinesitherapie Merksem</title>
+    
+    <!-- Preconnect for better performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="img/logo.svg" as="image">
+    
+    <!-- Fonts - loaded with display=swap for better performance -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Critical CSS for above-the-fold content (inline for faster rendering) -->
+    <style>
+        /* Critical inline CSS for faster first paint */
+        body { font-family: 'Outfit', -apple-system, sans-serif; background-color: #FAF9F7; }
+        .header { position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; background: rgba(250, 249, 247, 0.85); }
+        .logo { display: flex; align-items: center; gap: 0.75rem; }
+        .logo-icon { width: 50px; height: 50px; }
+        .hero { min-height: 100vh; padding-top: 100px; }
+    </style>
+</head>
+<body>
+    <!-- Decorative background elements -->
+    <div class="bg-decoration">
+        <div class="bg-circle bg-circle-1"></div>
+        <div class="bg-circle bg-circle-2"></div>
+        <div class="bg-circle bg-circle-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <span class="logo-icon">
+                    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/>
+                        <path d="M20 8 C20 8, 12 16, 12 22 C12 28, 16 32, 20 32 C24 32, 28 28, 28 22 C28 16, 20 8, 20 8 Z" fill="currentColor" opacity="0.3"/>
+                        <path d="M20 12 Q16 18, 16 22 Q16 28, 20 28 Q24 28, 24 22 Q24 18, 20 12" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    </svg>
+                </span>
+                <span class="logo-text">M-Physio Care</span>
+            </a>
+            
+            <nav class="nav" id="nav">
+                <ul class="nav-list">
+                    <li>
+                        <!-- Language Switcher -->
+                        <div class="lang-switcher" id="langSwitcher">
+                            <a href="index.html" class="lang-btn" title="Verander naar Nederlands">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="2" y1="12" x2="22" y2="12"/>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                </svg>
+                                <span class="lang-text">PL</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li><a href="#diensten" class="nav-link">Zabiegi</a></li>
+                    <li><a href="#over" class="nav-link">O mnie</a></li>
+                    <li><a href="#praktijk" class="nav-link">Praktyka</a></li>
+                    <li><a href="#contact" class="nav-link nav-cta">Umów wizytę</a></li>
+                </ul>
+            </nav>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="Menu openen">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Language Detection Banner (voor Nederlandse gebruikers) -->
+        <div class="lang-banner" id="langBanner">
+            <div class="lang-banner-content">
+                <span class="lang-banner-flag">🇳🇱</span>
+                <span class="lang-banner-text">Deze pagina is ook in het Nederlands!</span>
+                <a href="index.html" class="lang-banner-btn">Wissel taal</a>
+                <button class="lang-banner-close" onclick="closeLangBanner()" aria-label="Sluiten">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <span class="hero-eyebrow">Fizjoterapia w Merksem</span>
+                    <h1 class="hero-title">
+                        <span>Twoje zdrowie,</span><br>
+                        <span class="hero-title-accent">nasza wiedza</span>
+                    </h1>
+                    <p class="hero-text">
+                        Indywidualna fizjoterapia oparta na dowodach naukowych, dostosowana do Twoich potrzeb. 
+                        Od leczenia bólu po rehabilitację — razem pracujemy nad trwałymi rezultatami.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#contact" class="btn btn-primary">
+                            <span>Umów wizytę</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                        <a href="#diensten" class="btn btn-secondary">Poznaj nasze zabiegi</a>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="hero-image-wrapper">
+                        <div class="hero-image-frame">
+                            <img src="img/musculo.png" alt="Kinesitherapie behandeling" class="hero-image">
+                        </div>
+                        <div class="hero-card hero-card-1">
+                            <span class="hero-card-number">10+</span>
+                            <span class="hero-card-text">jaar ervaring</span>
+                        </div>
+                        <div class="hero-card hero-card-2">
+                            <span class="hero-card-icon">✓</span>
+                            <span class="hero-card-text">Geconventioneerd</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-scroll">
+                <span>Scroll</span>
+                <div class="hero-scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="services" id="diensten">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-eyebrow">Zabiegi</span>
+                    <h2 class="section-title">Specjalistyczna opieka dla każdego</h2>
+                    <p class="section-subtitle">
+                        Szeroka gama zabiegów opartych na dowodach naukowych, dostosowanych do Twoich dolegliwości i celów.
+                    </p>
+                </header>
+                
+                <div class="services-grid">
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="img/musculo.png" alt="Terapia mięśniowo-szkieletowa" loading="lazy">
+                            <div class="service-image-overlay"></div>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Terapia mięśniowo-szkieletowa</h3>
+                            <p class="service-text">Ukierunkowane leczenie bólu pleców, szyi i stawów poprzez terapię manualną, mobilizacje i ćwiczenia terapeutyczne.</p>
+                            <span class="service-link">
+                                <span>Więcej informacji</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="img/revalidatie.png" alt="Rehabilitacja pooperacyjna" loading="lazy">
+                            <div class="service-image-overlay"></div>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Rehabilitacja pooperacyjna</h3>
+                            <p class="service-text">Indywidualnie dopasowane programy bezpiecznego i skutecznego powrotu do zdrowia po operacji.</p>
+                            <span class="service-link">
+                                <span>Więcej informacji</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="img/sportblessure.png" alt="Kontuzje sportowe" loading="lazy">
+                            <div class="service-image-overlay"></div>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Kontuzje sportowe</h3>
+                            <p class="service-text">Leczenie i rehabilitacja ostrych i przewlekłych kontuzji sportowych, w tym wsparcie powrotu do sportu.</p>
+                            <span class="service-link">
+                                <span>Więcej informacji</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="img/nekkaak.png" alt="Ból szyi i szczęki" loading="lazy">
+                            <div class="service-image-overlay"></div>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Ból szyi i szczęki</h3>
+                            <p class="service-text">Ukierunkowana terapia dolegliwości szyi, bólów głowy i problemów szczękowych przy użyciu technik manualnych i specyficznych ćwiczeń.</p>
+                            <span class="service-link">
+                                <span>Więcej informacji</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="img/zwanger.png" alt="Opieka w ciąży" loading="lazy">
+                            <div class="service-image-overlay"></div>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Opieka w ciąży</h3>
+                            <p class="service-text">Specjalistyczne wsparcie podczas ciąży i po porodzie z ćwiczeniami zmniejszającymi ból i poprawiającymi postawę.</p>
+                            <span class="service-link">
+                                <span>Więcej informacji</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-image">
+                            <img src="img/houding.png" alt="Profilaktyka i porada posturalna" loading="lazy">
+                            <div class="service-image-overlay"></div>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Profilaktyka i ergonomia</h3>
+                            <p class="service-text">Analiza postawy, porady ergonomiczne i praktyczne schematy ćwiczeń zapobiegające dolegliwościom.</p>
+                            <span class="service-link">
+                                <span>Więcej informacji</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="service-card service-card-highlight">
+                        <div class="service-image">
+                            <img src="img/dryneedling.png" alt="Suche igłowanie" loading="lazy">
+                            <div class="service-image-overlay"></div>
+                        </div>
+                        <div class="service-content">
+                            <h3 class="service-title">Suche igłowanie</h3>
+                            <p class="service-text">Leczenie mięśniowo-powięziowych punktów spustowych cienkimi igłami dla szybkiego zmniejszenia napięcia i bólu.</p>
+                            <span class="service-link">
+                                <span>Więcej informacji</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about" id="over">
+            <div class="container about-container">
+                <div class="about-image-col">
+                    <div class="about-image-wrapper">
+                        <div class="about-slider" id="aboutSlider">
+                            <div class="about-slider-track">
+                                <div class="about-slide active">
+                                    <img src="img/over-1.jpg" alt="Marta in de praktijk met anatomisch skelet" class="about-image">
+                                </div>
+                                <div class="about-slide">
+                                    <img src="img/over-2.jpg" alt="M-Physio Care praktijk in Merksem" class="about-image">
+                                </div>
+                                <div class="about-slide">
+                                    <img src="img/over-3.jpg" alt="Marta - Kinesitherapeut" class="about-image">
+                                </div>
+                            </div>
+                            <div class="about-slider-nav">
+                                <button class="slider-btn slider-btn-prev" aria-label="Vorige foto">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                                    </svg>
+                                </button>
+                                <div class="slider-dots">
+                                    <button class="slider-dot active" data-slide="0" aria-label="Foto 1"></button>
+                                    <button class="slider-dot" data-slide="1" aria-label="Foto 2"></button>
+                                    <button class="slider-dot" data-slide="2" aria-label="Foto 3"></button>
+                                </div>
+                                <button class="slider-btn slider-btn-next" aria-label="Volgende foto">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="about-accent"></div>
+                    </div>
+                </div>
+                
+                <div class="about-content">
+                    <span class="section-eyebrow">O mnie</span>
+                    <h2 class="section-title">Indywidualna opieka z wieloletnim doświadczeniem</h2>
+                    
+                    <div class="about-text">
+                        <p>
+                            Witaj w M-Physio Care! Jestem Marta, zaangażowana fizjoterapeutka z pasją do 
+                            ludzkiego ciała i ruchu. Moja praktyka w Merksem oferuje indywidualną uwagę 
+                            i zabiegi oparte na dowodach naukowych.
+                        </p>
+                        <p>
+                            Każdy pacjent jest wyjątkowy, dlatego każde leczenie zaczyna się od dokładnego 
+                            wywiadu i badania. Wspólnie ustalamy osiągalne cele i pracujemy nad Twoim 
+                            powrotem do zdrowia łącząc terapię manualną, ćwiczenia i praktyczne porady do domu.
+                        </p>
+                        <p>
+                            Moje podejście jest celowe i przejrzyste: zawsze wiesz, co robimy i dlaczego. 
+                            W ten sposób wspólnie pracujemy nad trwałymi rezultatami.
+                        </p>
+                    </div>
+                    
+                    <div class="about-credentials">
+                        <div class="credential">
+                            <span class="credential-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                            </span>
+                            <span class="credential-text">Magister Fizjoterapii</span>
+                        </div>
+                        <div class="credential">
+                            <span class="credential-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                            </span>
+                            <span class="credential-text">Zarejestrowany i konwencjonowany</span>
+                        </div>
+                        <div class="credential">
+                            <span class="credential-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                            </span>
+                            <span class="credential-text">Specjalizacja mięśniowo-szkieletowa</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Info Section -->
+        <section class="practice" id="praktijk">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-eyebrow">Praktyka</span>
+                    <h2 class="section-title">Informacje praktyczne</h2>
+                </header>
+                
+                <div class="practice-grid">
+                    <div class="practice-card">
+                        <div class="practice-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 6v6l4 2"/>
+                            </svg>
+                        </div>
+                        <h3>Godziny otwarcia</h3>
+                        <div class="practice-hours">
+                            <div class="hours-row">
+                                <span>Poniedziałek</span>
+                                <span>9:00 - 20:00</span>
+                            </div>
+                            <div class="hours-row">
+                                <span>Wtorek</span>
+                                <span>9:00 - 20:00</span>
+                            </div>
+                            <div class="hours-row">
+                                <span>Środa</span>
+                                <span>Zamknięte</span>
+                            </div>
+                            <div class="hours-row">
+                                <span>Czwartek</span>
+                                <span>9:00 - 20:00</span>
+                            </div>
+                            <div class="hours-row">
+                                <span>Piątek</span>
+                                <span>9:00 - 15:00</span>
+                            </div>
+                            <div class="hours-row">
+                                <span>Weekend</span>
+                                <span>Zamknięte</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-card">
+                        <div class="practice-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <h3>Lokalizacja</h3>
+                        <p class="practice-address">
+                            Kinesist Merksem<br>
+                            Laarsebaan 44<br>
+                            2170 Antwerpen<br>
+                            <button class="practice-map-link" onclick="openMapModal()">Zobacz na mapie →</button>
+                        </p>
+                    </div>
+                    
+                    <div class="practice-card">
+                        <div class="practice-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                        </div>
+                        <h3>Wizyta</h3>
+                        <p>Chcesz szybko umówić wizytę? Zadzwoń, napisz lub skorzystaj z poniższego formularza.</p>
+                        <a href="#contact" class="btn btn-secondary btn-small">Umów wizytę</a>
+                    </div>
+                    
+                    <div class="practice-card">
+                        <div class="practice-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <h3>Zwrot kosztów</h3>
+                        <p>Konwencjonowany fizjoterapeuta. Większość zabiegów jest częściowo refundowana przez ubezpieczenie zdrowotne.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-eyebrow">Opinie</span>
+                    <h2 class="section-title">Co mówią pacjenci</h2>
+                </header>
+                
+                <div class="testimonials-grid">
+                    <blockquote class="testimonial">
+                        <div class="testimonial-content">
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p>"Spokojna i fachowa opieka. Po 6 tygodniach leczenia nie mam już bólu podczas pracy. Bardzo zadowolony z indywidualnego podejścia."</p>
+                        </div>
+                        <footer class="testimonial-footer">
+                            <cite>— Sara V., Merksem</cite>
+                        </footer>
+                    </blockquote>
+                    
+                    <blockquote class="testimonial">
+                        <div class="testimonial-content">
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p>"Jasne wyjaśnienia na każdym etapie leczenia. Ćwiczenia do domu są praktyczne i naprawdę pomagają. Polecam!"</p>
+                        </div>
+                        <footer class="testimonial-footer">
+                            <cite>— Tom D., Antwerpia</cite>
+                        </footer>
+                    </blockquote>
+                    
+                    <blockquote class="testimonial">
+                        <div class="testimonial-content">
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p>"Po operacji kolana byłam niepewna rehabilitacji. Dzięki profesjonalnemu wsparciu mogłam wrócić do sportu szybciej niż oczekiwano."</p>
+                        </div>
+                        <footer class="testimonial-footer">
+                            <cite>— Lien M., Deurne</cite>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <div class="container contact-container">
+                <div class="contact-info">
+                    <span class="section-eyebrow">Kontakt</span>
+                    <h2 class="section-title">Umów wizytę</h2>
+                    <p class="contact-intro">
+                        Masz pytania lub chcesz umówić wizytę? Skontaktuj się za pomocą poniższego 
+                        formularza, telefonu lub e-maila. Odpowiem tak szybko, jak to możliwe.
+                    </p>
+                    
+                    <div class="contact-methods">
+                        <a href="tel:+32483182663" class="contact-method">
+                            <span class="contact-method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                            </span>
+                            <span class="contact-method-text">
+                                <strong>Telefon</strong>
+                                +32 483 18 26 63
+                            </span>
+                        </a>
+                        
+                        <a href="mailto:info@kinesistmerksem.com" class="contact-method">
+                            <span class="contact-method-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                            </span>
+                            <span class="contact-method-text">
+                                <strong>E-mail</strong>
+                                info@kinesistmerksem.com
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                
+                <form class="contact-form" id="contactForm" action="https://formspree.io/f/info@kinesistmerksem.com" method="POST">
+                    <div class="form-group">
+                        <label for="name">Imię i nazwisko <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="Twoje pełne imię i nazwisko">
+                    </div>
+                    
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label for="email">E-mail <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required placeholder="twoj@email.pl">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefon</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+32 ...">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="service">Rodzaj zabiegu</label>
+                        <select id="service" name="service">
+                            <option value="">Wybierz jeśli dotyczy</option>
+                            <option value="musculoskeletaal">Terapia mięśniowo-szkieletowa</option>
+                            <option value="revalidatie">Rehabilitacja pooperacyjna</option>
+                            <option value="sport">Kontuzje sportowe</option>
+                            <option value="nek-kaak">Ból szyi i szczęki</option>
+                            <option value="zwangerschap">Opieka w ciąży</option>
+                            <option value="preventie">Profilaktyka i ergonomia</option>
+                            <option value="dryneedling">Suche igłowanie</option>
+                            <option value="andere">Inne</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Twoja wiadomość</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Krótko opisz swoje dolegliwości lub pytanie..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date">Preferowana data (opcjonalnie)</label>
+                        <input type="date" id="date" name="voorkeursdatum">
+                    </div>
+                    
+                    <!-- Hidden field for subject line in email -->
+                    <input type="hidden" name="_subject" value="Nowe zapytanie o wizytę ze strony internetowej">
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <span>Wyślij zapytanie</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"/>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="form-message" id="formMessage" role="status" aria-live="polite"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <span class="logo-icon">
+                            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/>
+                                <path d="M20 8 C20 8, 12 16, 12 22 C12 28, 16 32, 20 32 C24 32, 28 28, 28 22 C28 16, 20 8, 20 8 Z" fill="currentColor" opacity="0.3"/>
+                                <path d="M20 12 Q16 18, 16 22 Q16 28, 20 28 Q24 28, 24 22 Q24 18, 20 12" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            </svg>
+                        </span>
+                        <span class="logo-text">M-Physio Care</span>
+                    </a>
+                    <p class="footer-tagline">Fizjoterapia z indywidualnym podejściem</p>
+                </div>
+                
+                <nav class="footer-nav">
+                    <div class="footer-nav-col">
+                        <h4>Nawigacja</h4>
+                        <ul>
+                            <li><a href="#diensten">Zabiegi</a></li>
+                            <li><a href="#over">O mnie</a></li>
+                            <li><a href="#praktijk">Praktyka</a></li>
+                            <li><a href="#contact">Kontakt</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-nav-col">
+                        <h4>Zabiegi</h4>
+                        <ul>
+                            <li><a href="#diensten">Mięśniowo-szkieletowa</a></li>
+                            <li><a href="#diensten">Rehabilitacja</a></li>
+                            <li><a href="#diensten">Kontuzje sportowe</a></li>
+                            <li><a href="#diensten">Suche igłowanie</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-nav-col">
+                        <h4>Kontakt</h4>
+                        <ul>
+                            <li>Laarsebaan 44</li>
+                            <li>2170 Antwerpen</li>
+                            <li><a href="tel:+32483182663">+32 483 18 26 63</a></li>
+                            <li><a href="mailto:info@kinesistmerksem.com">info@kinesistmerksem.com</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> M-Physio Care. Wszelkie prawa zastrzeżone.</p>
+                <div class="footer-links">
+                    <a href="#">Prywatność</a>
+                    <a href="#">Regulamin</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating CTA -->
+    <button class="floating-cta" id="floatingCta" aria-label="Umów wizytę">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <span>Wizyta</span>
+    </button>
+
+    <!-- Map Modal -->
+    <div class="map-modal" id="mapModal">
+        <div class="map-modal-backdrop" onclick="closeMapModal()"></div>
+        <div class="map-modal-content">
+            <button class="map-modal-close" onclick="closeMapModal()" aria-label="Zamknij">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+            <h3>Otwórz za pomocą</h3>
+            <p class="map-address">Laarsebaan 44, 2170 Antwerpen</p>
+            <div class="map-options">
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Laarsebaan+44,+2170+Antwerpen,+Belgium" target="_blank" rel="noopener" class="map-option">
+                    <span class="map-option-icon map-google">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </span>
+                    <span>Google Maps</span>
+                </a>
+                <a href="https://maps.apple.com/?daddr=Laarsebaan+44,+2170+Antwerpen,+Belgium" target="_blank" rel="noopener" class="map-option">
+                    <span class="map-option-icon map-apple">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                        </svg>
+                    </span>
+                    <span>Apple Maps</span>
+                </a>
+                <a href="https://waze.com/ul?q=Laarsebaan+44,+2170+Antwerpen,+Belgium&navigate=yes" target="_blank" rel="noopener" class="map-option">
+                    <span class="map-option-icon map-waze">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.54 6.63c-1.21-3.87-5.26-5.54-9.54-4.54-3.77.88-6.58 4.29-6.96 8.16-.24 2.37.4 4.65 1.7 6.47-1.6.49-2.74 1.24-2.74 2.13 0 1.42 2.35 2.56 5.25 2.56 2.13 0 3.96-.63 4.78-1.53 2.4.07 4.53-.74 6.04-2.33 2.25-2.38 2.68-6.29 1.47-10.92zm-9.79 12.46c-.42 0-.76-.34-.76-.76s.34-.76.76-.76.76.34.76.76-.34.76-.76.76zm4.46-.76c0 .42-.34.76-.76.76s-.76-.34-.76-.76.34-.76.76-.76.76.34.76.76zm1.29-4.57c-.82.93-1.95 1.53-3.15 1.68-.23.03-.45-.12-.53-.34-.07-.22.02-.47.21-.59.93-.58 1.29-1.61.89-2.56-.41-.97-1.5-1.48-2.54-1.19-1.04.29-1.71 1.31-1.55 2.38.15 1-.39 1.94-1.29 2.25-.19.06-.39-.02-.49-.19-.1-.17-.08-.39.06-.53.73-.74.84-1.88.27-2.74-.58-.88-1.68-1.23-2.66-.85-.19.07-.41-.01-.51-.19-.1-.18-.06-.41.1-.54.96-.79 2.29-.88 3.36-.24 1.07.65 1.66 1.87 1.49 3.11-.14 1.02.58 1.95 1.59 2.04 1.01.1 1.92-.63 2.02-1.64.12-1.25.89-2.34 2.02-2.87 1.13-.53 2.44-.34 3.38.48.18.16.21.43.08.63-.14.2-.39.27-.6.17-.92-.42-2.01-.23-2.72.47z"/>
+                        </svg>
+                    </span>
+                    <span>Waze</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
