@@ -1,5 +1,5 @@
 # Alleen contact.php mag van buitenaf aangeroepen worden
-<FilesMatch "^(bootstrap|config|config\.example)\.php$">
+<FilesMatch "^(bootstrap|config|config\.example|mails)\.php$">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>

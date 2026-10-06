@@ -7,7 +7,7 @@ $pad = rawurldecode(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? '/');
 
 // Afgeschermde bestanden en mappen (net als op de echte server)
 if (preg_match('#^/(data/|api/lib/|\.git|\.devcontainer/|\.github/)#', $pad)
-    || preg_match('#^/api/(bootstrap|config|config\.example)\.php$#', $pad)) {
+    || preg_match('#^/api/(bootstrap|config|config\.example|mails)\.php$#', $pad)) {
     http_response_code(403);
     exit('403 – Geen toegang');
 }

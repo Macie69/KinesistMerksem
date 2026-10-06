@@ -126,62 +126,21 @@ try {
     respond(false, $t['server'], 500);
 }
 
-// --- Mail naar de praktijk ---
-$datumMooi = $datum ? date('d/m/Y', strtotime($datum)) : '–';
-$rij = static fn(string $label, string $waarde): string =>
-    '<tr><td style="padding:6px 12px 6px 0;color:#666;vertical-align:top;white-space:nowrap;">' . h($label)
-    . '</td><td style="padding:6px 0;">' . nl2br(h($waarde !== '' ? $waarde : '–')) . '</td></tr>';
+// --- E-mails versturen (teksten staan in api/mails.php) ---
+require __DIR__ . '/mails.php';
 
-$htmlPraktijk = mail_layout('Nieuwe afspraakaanvraag #' . $id,
-    '<table cellpadding="0" cellspacing="0" style="font-size:14px;">'
-    . $rij('Naam', $naam)
-    . $rij('E-mail', $email)
-    . $rij('Telefoon', $telefoon)
-    . $rij('Behandeling', $behandeling)
-    . $rij('Voorkeursdatum', $datumMooi)
-    . $rij('Taal', $lang === 'pl' ? 'Pools' : 'Nederlands')
-    . $rij('Bericht', $bericht)
-    . '</table>'
-    . '<p style="margin-top:20px;font-size:13px;color:#666;">Klik op <strong>Beantwoorden</strong> om de patiënt rechtstreeks te mailen. '
-    . 'Alle aanvragen staan ook op <a href="https://kinesistmerksem.com/beheer/" style="color:#9A6B6E;">de beheerpagina</a>.</p>'
-);
-$textPraktijk = "Nieuwe afspraakaanvraag #$id\n\nNaam: $naam\nE-mail: $email\nTelefoon: $telefoon\n"
-    . "Behandeling: $behandeling\nVoorkeursdatum: $datumMooi\n\nBericht:\n$bericht\n";
+$aanvraag = [
+    'id' => $id, 'naam' => $naam, 'email' => $email, 'telefoon' => $telefoon,
+    'behandeling' => $behandeling, 'bericht' => $bericht, 'datum' => $datum, 'lang' => $lang,
+];
 
-$okPraktijk = send_mail(
-    config()['practice_email'],
-    "Nieuwe aanvraag: $naam" . ($behandeling ? " – $behandeling" : ''),
-    $htmlPraktijk,
-    $textPraktijk,
-    $email,
-    $naam
-);
+[$onderwerp, $html, $tekst] = mail_voor_praktijk($aanvraag);
+$okPraktijk = send_mail(config()['practice_email'], $onderwerp, $html, $tekst, $email, nice_name($naam));
 
-// --- Bevestiging naar de patiënt ---
 $okPatient = null;
 if (config()['send_confirmation']) {
-    if ($lang === 'pl') {
-        $onderwerp = 'Otrzymaliśmy Twoje zapytanie – M-Physio Care';
-        $titel = 'Dziękujemy, ' . $naam . '!';
-        $tekst = 'Otrzymaliśmy Twoje zapytanie o wizytę. Skontaktujemy się z Tobą jak najszybciej, '
-            . 'aby ustalić termin. W pilnych sprawach zadzwoń: +32 483 18 26 63.';
-        $groet = 'Pozdrawiam serdecznie,<br>Marta – M-Physio Care';
-    } else {
-        $onderwerp = 'We hebben uw aanvraag ontvangen – M-Physio Care';
-        $titel = 'Bedankt, ' . $naam . '!';
-        $tekst = 'We hebben uw afspraakaanvraag goed ontvangen. We nemen zo snel mogelijk contact met u op '
-            . 'om een moment af te spreken. Dringend? Bel gerust naar +32 483 18 26 63.';
-        $groet = 'Met vriendelijke groet,<br>Marta – M-Physio Care';
-    }
-    $okPatient = send_mail(
-        $email,
-        $onderwerp,
-        mail_layout($titel, '<p style="font-size:15px;line-height:1.6;">' . h($tekst) . '</p>'
-            . '<p style="font-size:15px;line-height:1.6;margin-top:20px;">' . $groet . '</p>'),
-        "$titel\n\n$tekst\n\nM-Physio Care\nLaarsebaan 44, 2170 Antwerpen",
-        config()['practice_email'],
-        config()['from_name']
-    );
+    [$onderwerp, $html, $tekst] = mail_voor_patient($aanvraag);
+    $okPatient = send_mail($email, $onderwerp, $html, $tekst, config()['practice_email'], config()['from_name']);
 }
 
 // Mailstatus bijhouden (de aanvraag is hoe dan ook veilig opgeslagen)
