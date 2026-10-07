@@ -92,7 +92,7 @@ function mail_voor_patient(array $a, array $layout = []): array
             'datum'     => 'Voorkeursdatum',
             'knop'      => 'Bel ons: +32 483 18 26 63',
             'link'      => 'Bezoek onze website',
-            'url'       => 'https://kinesistmerksem.com/',
+            'url'       => 'https://kinesistmerksem.com/nl/',
             'voetnoot'  => 'Heeft u deze aanvraag niet verstuurd? Dan kunt u deze e-mail gewoon negeren.',
             'groet'     => "Met vriendelijke groet,\nMarta – M-Physio Care",
         ];

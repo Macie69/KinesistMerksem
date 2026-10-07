@@ -530,4 +530,76 @@
     // Initialize banner
     initLangBanner();
 
+    // ==========================================================================
+    // Servicekaarten omdraaien bij "Meer info"
+    // ==========================================================================
+    const serviceCards = document.querySelectorAll('.service-card[data-service]');
+
+    function setFlipped(card, flipped, moveFocus) {
+        const front = card.querySelector('.service-front');
+        const back = card.querySelector('.service-back');
+        const btn = card.querySelector('.service-flip-btn');
+
+        card.classList.toggle('is-flipped', flipped);
+        if (btn) btn.setAttribute('aria-expanded', String(flipped));
+
+        // Alleen de zichtbare kant is bereikbaar met toetsenbord/schermlezer
+        if (flipped) {
+            back.removeAttribute('inert');
+            front.setAttribute('inert', '');
+        } else {
+            front.removeAttribute('inert');
+            back.setAttribute('inert', '');
+        }
+
+        if (moveFocus) {
+            setTimeout(function() {
+                const target = flipped ? back.querySelector('.service-back-hint') : btn;
+                if (target) target.focus({ preventScroll: true });
+            }, 350);
+        }
+    }
+
+    serviceCards.forEach(function(card) {
+        // Klik op de voorkant (of op "Meer info") = omdraaien
+        card.querySelector('.service-front').addEventListener('click', function(e) {
+            // Andere omgedraaide kaarten terugdraaien
+            serviceCards.forEach(function(other) {
+                if (other !== card && other.classList.contains('is-flipped')) setFlipped(other, false, false);
+            });
+            setFlipped(card, true, e.detail === 0);
+        });
+
+        // Klik op de achterkant = terugdraaien (behalve op "Afspraak maken")
+        card.querySelector('.service-back').addEventListener('click', function(e) {
+            if (e.target.closest('.service-book')) return;
+            setFlipped(card, false, e.detail === 0); // e.detail 0 = toetsenbord: focus terugzetten
+        });
+
+        // "Afspraak maken": behandeling alvast invullen in het formulier
+        card.querySelector('.service-book').addEventListener('click', function() {
+            const select = document.getElementById('service');
+            if (select) select.value = this.dataset.service;
+            setTimeout(function() { setFlipped(card, false, false); }, 600);
+        });
+    });
+
+    // Escape = alle kaarten terugdraaien
+    document.addEventListener('keydown', function(e) {
+        if (e.key !== 'Escape') return;
+        serviceCards.forEach(function(card) {
+            if (card.classList.contains('is-flipped')) setFlipped(card, false, card.contains(document.activeElement));
+        });
+    });
+
+    // ==========================================================================
+    // Taalkeuze onthouden (1 jaar) zodat kinesistmerksem.com/ meteen de juiste taal opent
+    // ==========================================================================
+    document.querySelectorAll('.lang-btn, .lang-banner-btn').forEach(function(link) {
+        link.addEventListener('click', function() {
+            const taal = (link.getAttribute('href') || '').indexOf('/pl/') === 0 ? 'pl' : 'nl';
+            document.cookie = 'mp_lang=' + taal + '; path=/; max-age=31536000; SameSite=Lax';
+        });
+    });
+
 })();

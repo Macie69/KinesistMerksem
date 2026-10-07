@@ -23,8 +23,18 @@ RewriteRule ^index-pl\.html$ /pl/ [L,R=301]
 RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
 RewriteRule ^(.*/)?index\.html$ /$1 [L,R=301]
 
-# 5. /pl zonder slash -> /pl/
-RewriteRule ^pl$ /pl/ [L,R=301]
+# 5. /pl en /nl zonder slash -> met slash
+RewriteRule ^(pl|nl)$ /$1/ [L,R=301]
+
+# 6. Hoofdpagina -> juiste taal
+#    eerst de taal die de bezoeker zelf koos (cookie), anders de browsertaal, anders Nederlands
+RewriteCond %{HTTP_COOKIE} (^|;\s*)mp_lang=pl(;|$)
+RewriteRule ^$ /pl/ [L,R=302]
+RewriteCond %{HTTP_COOKIE} (^|;\s*)mp_lang=nl(;|$)
+RewriteRule ^$ /nl/ [L,R=302]
+RewriteCond %{HTTP:Accept-Language} ^pl [NC]
+RewriteRule ^$ /pl/ [L,R=302]
+RewriteRule ^$ /nl/ [L,R=302]
 
 # Gevoelige bestanden nooit tonen
 <FilesMatch "\.(sqlite|sqlite-wal|sqlite-shm|md|log|example\.php)$|^\.git">

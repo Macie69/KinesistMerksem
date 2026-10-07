@@ -2,16 +2,18 @@
 
 Website van **M-Physio Care**, kinesitherapiepraktijk in Merksem (Antwerpen).
 
-🌐 Live: [kinesistmerksem.com](https://kinesistmerksem.com) · 🇵🇱 [kinesistmerksem.com/pl/](https://kinesistmerksem.com/pl/)
+🇳🇱 [kinesistmerksem.com/nl/](https://kinesistmerksem.com/nl/) · 🇵🇱 [kinesistmerksem.com/pl/](https://kinesistmerksem.com/pl/)
 
 ## Structuur
 
 | Pad | Inhoud |
 |-----|--------|
-| `index.html` | Nederlandse website → `kinesistmerksem.com/` |
+| `index.html` | Stuurt door naar `/nl/` of `/pl/` (gekozen taal of browsertaal) |
+| `nl/index.html` | Nederlandse website → `kinesistmerksem.com/nl/` |
 | `pl/index.html` | Poolse website → `kinesistmerksem.com/pl/` |
 | `css/`, `js/`, `img/` | Styling, scripts, afbeeldingen |
 | `api/contact.php` | Contactformulier: opslaan in database + e-mails |
+| `api/mails.php` | Teksten van de e-mails (NL/PL) |
 | `api/config.example.php` | Voorbeeld-instellingen (kopiëren naar `config.php`) |
 | `beheer/` | Beheerpagina om aanvragen te bekijken (met wachtwoord) |
 | `data/` | SQLite-database met aanvragen (beschermd, niet op GitHub) |

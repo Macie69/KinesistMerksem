@@ -12,10 +12,24 @@ if (preg_match('#^/(data/|api/lib/|\.git|\.devcontainer/|\.github/)#', $pad)
     exit('403 – Geen toegang');
 }
 
-// Nette URL's: /index.html -> /, /pl/index.html -> /pl/, /index-pl.html -> /pl/, /pl -> /pl/
-$redirects = ['/index.html' => '/', '/pl/index.html' => '/pl/', '/index-pl.html' => '/pl/', '/pl' => '/pl/'];
+// Nette URL's (zelfde regels als .htaccess op Hostinger)
+$redirects = [
+    '/index.html' => '/', '/index-pl.html' => '/pl/',
+    '/nl/index.html' => '/nl/', '/pl/index.html' => '/pl/',
+    '/nl' => '/nl/', '/pl' => '/pl/',
+];
 if (isset($redirects[$pad])) {
     header('Location: ' . $redirects[$pad], true, 301);
+    exit;
+}
+
+// Hoofdpagina -> juiste taal: gekozen taal (cookie), anders browsertaal, anders Nederlands
+if ($pad === '/') {
+    $taal = $_COOKIE['mp_lang'] ?? '';
+    if (!in_array($taal, ['nl', 'pl'], true)) {
+        $taal = stripos($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? '', 'pl') === 0 ? 'pl' : 'nl';
+    }
+    header('Location: /' . $taal . '/', true, 302);
     exit;
 }
 

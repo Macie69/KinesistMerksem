@@ -663,15 +663,12 @@ p:last-child {
 
 .service-card {
     position: relative;
-    background: var(--color-cream);
     border-radius: var(--radius-lg);
-    overflow: hidden;
-    transition: all var(--transition-base);
+    transition: transform var(--transition-base);
 }
 
 .service-card:hover {
     transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
 }
 
 .service-image {
@@ -1858,4 +1855,203 @@ p:last-child {
     width: 1px;
     height: 1px;
     overflow: hidden;
+}
+
+
+/* --------------------------------------------------------------------------
+   Servicekaarten: omdraaien bij "Meer info" (nog eens klikken = terug)
+   -------------------------------------------------------------------------- */
+.service-flip {
+    display: grid;              /* voor- en achterkant op dezelfde plek */
+    height: 100%;
+}
+
+/* Zacht vervagen: voorkant vervaagt, uitleg verschijnt op dezelfde plek */
+.service-front,
+.service-back {
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow var(--transition-base), border-color var(--transition-base);
+}
+
+.service-back {
+    opacity: 0;
+    transform: scale(0.97);
+    pointer-events: none;
+}
+
+.service-card.is-flipped .service-front {
+    opacity: 0;
+    transform: scale(1.02);
+    pointer-events: none;
+}
+
+.service-card.is-flipped .service-back {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.service-face {
+    grid-area: 1 / 1;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    /* Zachte, effen rand in licht oudroze */
+    border: 1.5px solid #EBD6D2;
+    box-shadow: 0 6px 20px rgba(187, 133, 136, 0.10);
+}
+
+.service-front {
+    background: var(--color-cream);
+    cursor: pointer;
+}
+
+/* Bij aanwijzen of omgedraaid: rand iets duidelijker, zachte gloed */
+.service-card:hover .service-face,
+.service-card.is-flipped .service-face {
+    border-color: #DDBDB8;
+    box-shadow: 0 12px 32px rgba(187, 133, 136, 0.18);
+}
+
+.service-flip-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* ---------- Achterkant: licht en eenvoudig ---------- */
+.service-back {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-lg);
+    cursor: pointer;
+    background: linear-gradient(160deg, #FBF4F1 0%, #F5E6E0 100%);
+}
+
+.service-back-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+}
+
+.service-back-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--color-text);
+    margin: 0.35rem 0 0.75rem;
+}
+
+.service-back-text {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-text-light);
+    margin-bottom: var(--space-md);
+}
+
+.service-back-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+}
+
+.service-back-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-md);
+    display: grid;
+    gap: 0.45rem;
+}
+
+.service-back-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: var(--color-text);
+}
+
+.service-back-list svg {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    padding: 3px;
+    margin-top: 1px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.service-back-actions {
+    margin-top: auto;           /* knop altijd onderaan */
+}
+
+/* Alleen voor toetsenbord en schermlezers: onzichtbaar tot je er met Tab op komt */
+.service-back-hint {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+    background: none;
+}
+
+.service-back-hint:focus-visible {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0 0 0 1rem;
+    clip: auto;
+    padding: 0.25rem 0.5rem;
+    font-family: inherit;
+    font-size: 0.8rem;
+    color: var(--color-primary-dark);
+    outline: 2px solid var(--color-primary);
+    border-radius: 6px;
+}
+
+.service-flip-btn:focus-visible,
+.service-back .service-book:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 4px;
+    border-radius: 6px;
+}
+
+/* Brede kaart (dry needling): tekst en lijst naast elkaar */
+@media (min-width: 768px) {
+    .service-card-highlight .service-back {
+        display: grid;
+        grid-template-columns: 1.25fr 1fr;
+        grid-template-areas:
+            "eyebrow label"
+            "title   list"
+            "text    list"
+            "actions actions";
+        column-gap: 3rem;
+        padding: var(--space-xl);
+        align-content: center;
+    }
+    .service-card-highlight .service-back-eyebrow { grid-area: eyebrow; align-self: end; }
+    .service-card-highlight .service-back-label   { grid-area: label; align-self: end; margin-bottom: 0; }
+    .service-card-highlight .service-back-title   { grid-area: title; }
+    .service-card-highlight .service-back-text    { grid-area: text; margin-bottom: 0; }
+    .service-card-highlight .service-back-list    { grid-area: list; align-self: start; margin: 0.9rem 0 0; }
+    .service-card-highlight .service-back-actions { grid-area: actions; margin-top: var(--space-lg); }
+}
+
+/* Bezoekers die liever geen bewegingen zien: direct wisselen */
+@media (prefers-reduced-motion: reduce) {
+    .service-front,
+    .service-back {
+        transition: none;
+        transform: none !important;
+    }
 }
